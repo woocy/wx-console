@@ -1,0 +1,133 @@
+{
+  "name": "wx-console",
+  "displayName": "wx-console",
+  "description": "wx-console — 旨在帮助开发人员编码时更快的输入/移除 log，搭配上醒目的主题，提高开发效率。",
+  "version": "0.3.2",
+  "publisher": "AT-9420",
+  "repository": "https://github.com/woocy/wx-console",
+  "icon": "static/console-helper.png",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "keywords": [
+    "console",
+    "console utils",
+    "console helper",
+    "console-helper",
+    "log-helper",
+    "console.log",
+    "console.log javascript",
+    "console log javascript",
+    "log",
+    "log helper",
+    "log utils",
+    "javascript console log",
+    "javascript console log utils",
+    "javascript console",
+    "javascript log",
+    "js log",
+    "js-log",
+    "c-log",
+    "日志小助手"
+  ],
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onCommand:wxConsole.insertLogStatement",
+    "onCommand:wxConsole.deleteAllLogStatements"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wxConsole.insertLogStatement",
+        "title": "在文件光标闪烁处插入 console.log 语句"
+      },
+      {
+        "command": "editor.action.insertSnippet",
+        "title": "快捷输出 console.log('[ ]', '') 语句"
+      },
+      {
+        "command": "wxConsole.deleteAllLogStatements",
+        "title": "删除当前文件中全部的 console.log 语句"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wxConsole.insertLogStatement",
+        "key": "ctrl+l",
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus && editorHasSelection"
+      },
+      {
+        "command": "wxConsole.deleteAllLogStatements",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d"
+      },
+      {
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && !editorHasSelection",
+        "args": {
+          "snippet": "console.log('[ $1 ] ->', $1)$0"
+        },
+        "key": "ctrl+l",
+        "mac": "cmd+shift+l"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "日志小助手",
+      "properties": {
+        "wxConsole.Prefix Logo": {
+          "type": "string",
+          "default": "",
+          "description": "前缀标识"
+        },
+        "wxConsole.Color": {
+          "type": "string",
+          "default": "#bf2c9f",
+          "description": "字体颜色(不填默认 #bf2c9f)"
+        },
+        "wxConsole.Color Bg": {
+          "type": "string",
+          "default": "pink",
+          "description": "背景颜色(不填默认 pink)"
+        },
+        "wxConsole.Font Size": {
+          "type": "string",
+          "default": "13px",
+          "description": "字号大小(不填默认 13px)"
+        },
+        "wxConsole.Show Semi": {
+          "type": "boolean",
+          "default": false,
+          "description": "末尾是否加分号"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.51.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.9.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "typescript": "^4.0.2",
+    "vscode-test": "^1.4.0"
+  }
+}
